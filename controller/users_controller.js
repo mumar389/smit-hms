@@ -742,8 +742,8 @@ module.exports.applyLeave = async (req, res) => {
     const twNumber = "+1 620 646 4490";
     const client = require("twilio")(accountSid, authToken);
     let cid=JSON.stringify(newLeave._id)
-    console.log(cid);
     const msgBody = `Your ward ${req.user.name} has request for leave, please verify and respond on our website accordingly https://smit-hms.vercel.app/leave/${cid}`;
+    console.log(msgBody);
     client.messages
       .create({
         body: `${msgBody}`,
