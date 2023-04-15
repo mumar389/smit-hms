@@ -747,7 +747,7 @@ module.exports.applyLeave = async (req, res) => {
       .create({
         body: `${msgBody}`,
         from: twNumber,
-        to: number,
+        to: `+919939329441`,
       })
       .then((mes) => {
         console.log(mes);
