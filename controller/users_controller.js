@@ -748,7 +748,7 @@ module.exports.applyLeave = async (req, res) => {
       .create({
         body: `${msgBody}`,
         from: "+1 620 646 4490",
-        to: `+919939329441`,
+        to: "+919939329441",
       })
       .then((mes) => {
         console.log(mes);
