@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
 import ClearIcon from "@mui/icons-material/Clear";
+import { base } from "../../../url/url";
 
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -64,7 +65,7 @@ const Display = (props) => {
       // console.log(`${message}`);
       sucessNotify(message);
       setInterval(() => {
-        window.location.reload();
+        window.open(`${base}/users/get-complains`);
       }, 100);
     }
   };
@@ -90,7 +91,7 @@ const Display = (props) => {
       // console.log(`${message}`);
       sucessNotify(message);
       setInterval(() => {
-        window.location.reload();
+        window.open(`${base}/users/get-complains`);
       }, 100);
     }
   };

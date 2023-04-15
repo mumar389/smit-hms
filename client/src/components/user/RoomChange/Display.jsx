@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
 import ClearIcon from "@mui/icons-material/Clear";
+import { base } from "../../../url/url";
 
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -49,7 +50,7 @@ const Display = (props) => {
       const { message } = response;
       sucessNotify(message);
       setInterval(() => {
-        window.location.reload();
+        window.open(`${base}/users/get-request`);
       }, 650);
     } else {
       console.log("error");
@@ -78,13 +79,13 @@ const Display = (props) => {
       const { message } = resp;
       sucessNotify(message);
       setInterval(() => {
-        window.location.reload();
+        window.open(`${base}/users/get-request`);
       }, 650);
     } else {
       console.log("Error");
       errorNotify("Error,, try again!!");
       setInterval(() => {
-        window.location.reload();
+        window.open(`${base}/users/get-request`);
       }, 650);
     }
   };

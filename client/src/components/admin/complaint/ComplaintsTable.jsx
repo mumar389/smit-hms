@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import IconButton from "@mui/material/IconButton";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
+import { base } from "../../../url/url";
 // import styled from "@emotion/styled";
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -62,7 +63,7 @@ const ComplaintsTable = (props) => {
       const { message } = response;
       sucessNotify(message);
       setInterval(() => {
-        window.location.reload();
+        window.open(`${base}/admin/complains`);
       }, 900);
     }
   };

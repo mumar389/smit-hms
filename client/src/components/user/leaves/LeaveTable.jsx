@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 // import {  useNavigate } from "react-router-dom";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
+import { base } from "../../../url/url";
 
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -61,7 +62,7 @@ const LeaveTable = (props) => {
       // console.log(`${message}`);
       sucessNotify(message);
       setInterval(() => {
-        window.location.reload();
+        window.open(`${base}/users/get-leave`);
       }, 100);
     }
   };
