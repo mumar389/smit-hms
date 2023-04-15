@@ -11,6 +11,7 @@ module.exports.getLeaveById = async (req, res) => {
         message: "Unable to Find the leave",
       });
     }
+    console.log("Cu-:",currentLeave);
     return res.status(200).json({
       message: "Your Leave",
       data: currentLeave,
