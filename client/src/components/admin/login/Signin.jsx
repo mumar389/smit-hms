@@ -58,10 +58,10 @@ const Signin = () => {
       const res = await response.json();
       console.log("Bckend response-:", res);
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/admin/dashboard`, "_self");
-      }, 1000);
-      // navigate('/admin/');
+      // setInterval(() => {
+      //   window.open(`${base}/admin/dashboard`, "_self");
+      // }, 1000);
+      navigate('/admin/dashboard');
     }
   };
   React.useEffect(() => {

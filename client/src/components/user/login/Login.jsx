@@ -61,10 +61,10 @@ function SignIn() {
       // const res = await response.json();
       // console.log("Backend response-:", res);
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/users/`, "_self");
-      }, 650);
-      // navigate('/admin/');
+      // setInterval(() => {
+      //   window.open(`${base}/users/`, "_self");
+      // }, 650);
+      navigate('/users/');
     }
   };
   React.useEffect(() => {
