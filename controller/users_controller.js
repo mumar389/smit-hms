@@ -736,7 +736,19 @@ module.exports.applyLeave = async (req, res) => {
         message: "Unable to apply for leave",
       });
     }
-    //send message to parents with the link-: http://localhost:3000/leave/:leave_id
+    //send message to parents with the link-: http://localhost:3000/leave/:leave_id-:
+    const accountSid = process.env.ACCOUNT_SID;
+    const authToken = process.env.AUTH_TOKEN;
+    const client = require("twilio")(accountSid, authToken);
+    console.log(newLeave.id);
+    const msgBody = `Your ward ${req.user.name} has request for leave, please verify and respond on our website accordingly https://smit-hms.vercel.app/leave/${newLeave.id}`;
+    client.messages
+      .create({
+        body: msgBody,
+        from: "+1(620) 646-4490",
+        to: "+919939329441",
+      })
+      .then((message) => console.log(message.sid));
     return res.status(200).json({
       message:
         "Leave applied and link with message is send to your parents contact number",
