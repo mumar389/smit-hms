@@ -18,7 +18,7 @@ const Approve = () => {
   const SuccessNotify = (msg) => toast.success(`${msg}`);
   const params = useParams();
   const { id } = params;
-  console.log("id",id);
+  console.log("id", id);
   const [leave, setLeave] = useState({});
   const [loading, setLoading] = useState(true);
   const getRequest = async () => {
@@ -37,7 +37,7 @@ const Approve = () => {
     } else if (response.status === 200) {
       const res = await response.json();
       const { data } = res;
-      console.log("Data Back-:",data);
+      console.log("Data Back-:", data);
       setLeave(data);
       setLoading(false);
     } else {
@@ -74,9 +74,7 @@ const Approve = () => {
   };
 
   useEffect(() => {
-    return () => {
-      getRequest();
-    };
+    getRequest();
     // eslint-disable-next-line
   }, []);
 
