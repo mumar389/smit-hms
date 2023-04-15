@@ -17,15 +17,18 @@ const Home = () => {
           overflow: "hidden",
           opacity: 1,
         }}
-      >
-        <Box sx={{ m: 1,position:'relative' }}>
-          <Card
-            sx={{  height: "50vh", width: "50%",left:'100px' }}
-          ></Card>
-        </Box>
-      </Box>
+      ></Box>
     </>
   );
 };
 
 export default Home;
+
+/*
+
+  <Box sx={{ m: 1,position:'relative' }}>
+          <Card
+            sx={{  height: "50vh", width: "50%",left:'100px' }}
+          ></Card>
+        </Box>
+*/

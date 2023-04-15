@@ -58,12 +58,12 @@ function SignIn() {
       // console.log("Failed to login");
       ErrorNotify();
     } else {
-      const res = await response.json();
-      console.log("Backend response-:", res);
+      // const res = await response.json();
+      // console.log("Backend response-:", res);
       SuccessNotify();
       setInterval(() => {
         window.open(`${base}/users/`, "_self");
-      }, 1000);
+      }, 650);
       // navigate('/admin/');
     }
   };
