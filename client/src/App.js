@@ -30,6 +30,7 @@ import LeaveReq from "./components/warden/Requests/LeaveReq";
 import LeaveForm from "./components/user/leaves/LeaveForm";
 import Leaves from "./components/user/leaves/Leaves";
 import AllLeave from "./components/admin/Leaves/AllLeave";
+import UpdatePasswordWarden from "./components/warden/dashboard/UpdatePasswordWarden";
 function App() {
   return (
     <>
@@ -106,7 +107,7 @@ function App() {
             element={<AuthUser Component={ChangeForm} />}
           />
           <Route
-            path="get-request"
+            path="get-request-page"
             element={<AuthUser Component={AllRequests} />}
           />
           <Route path="get-leave-page" element={<AuthUser Component={Leaves} />} />
@@ -129,6 +130,7 @@ function App() {
             element={<WardenAuth Component={DashboardWarden} />}
           />
           <Route path="get-req" element={<WardenAuth Component={LeaveReq} />} />
+          <Route path="new-password" element={<WardenAuth Component={UpdatePasswordWarden} />} />
         </Route>
       </Routes>
     </>

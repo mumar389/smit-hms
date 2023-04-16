@@ -766,11 +766,11 @@ module.exports.applyLeave = async (req, res) => {
 
 module.exports.getLeave = async (req, res) => {
   try {
-    console.log(req.user.id);
+    // console.log(req.user.id);
     Leave.find({ user: req.user.id })
       .populate("user")
       .exec((err, allLeave) => {
-        console.log(allLeave);
+        // console.log(allLeave);
         if (!allLeave || err) {
           return res.status(301).json({
             message: "No Leave Found",

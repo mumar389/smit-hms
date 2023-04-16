@@ -190,7 +190,7 @@ const SidebarWarden = () => {
             <MenuItem
               onClick={(e) => {
                 e.preventDefault();
-                navigate("/admin/update-password");
+                navigate("/warden/new-password");
               }}
             >
               Change password

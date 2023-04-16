@@ -119,7 +119,7 @@ const SideBarUsers = (props) => {
       icon: <FaExchangeAlt />,
     },
     {
-      path: "/users/get-request",
+      path: "/users/get-request-page",
       name: "All Requests",
       icon: <CgDetailsMore />,
     },
