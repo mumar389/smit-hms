@@ -722,7 +722,7 @@ module.exports.applyLeave = async (req, res) => {
     const wid = userRoom.warden;
     let allLeave = await Leave.find({});
     let no = `smit000${allLeave.length + 1}`;
-    console.log(no);
+    // console.log(no);
     const newLeave = await Leave.create({
       leaveNo: no,
       reason,
@@ -742,11 +742,11 @@ module.exports.applyLeave = async (req, res) => {
     const twNumber = process.env.TWN_NO;
     const client = require("twilio")(accountSid, authToken);
     let cid=JSON.stringify(newLeave._id)
-    const msgBody = `Your ward ${req.user.name} has request for leave, please verify and respond on our website accordingly https://smit-hms.vercel.app/leave/${cid}`;
-    console.log(msgBody);
+    const msgBody = `Your ward ${req.user.name} has request for leave, please verify and respond on our website accordingly https://smit-hms.vercel.app/leave/${newLeave.id}`;
+    // console.log(msgBody);
     client.messages
       .create({
-        body: `${msgBody}`,
+        body: msgBody,
         from: twNumber,
         to: "+919939329441",
       })
