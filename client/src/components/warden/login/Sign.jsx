@@ -57,7 +57,7 @@ const Sign = () => {
       const res = await response.json();
       console.log("Bckend response-:", res);
       SuccessNotify();
-      setInterval(() => {
+      setTimeout(() => {
         window.open(`${base}/warden/dashboard`, "_self");
       }, 100);
     }
