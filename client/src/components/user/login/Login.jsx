@@ -59,9 +59,9 @@ function SignIn() {
       ErrorNotify();
     } else {
       SuccessNotify();
-      setInterval(() => {
-        navigate("/users/");
-      }, 650);
+      // setInterval(() => {
+      // }, 650);
+      navigate("/users/");
     }
   };
   React.useEffect(() => {
