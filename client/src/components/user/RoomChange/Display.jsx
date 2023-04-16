@@ -11,11 +11,11 @@ import {
   // Button,
 } from "@mui/material";
 import { toast } from "react-toastify";
-// import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
 import ClearIcon from "@mui/icons-material/Clear";
-import { base } from "../../../url/url";
+// import { base } from "../../../url/url";
 
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -27,7 +27,7 @@ const sucessNotify = (msg) => {
 const Display = (props) => {
   const { requests, user } = props;
   const [cookie] = useCookies();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleApprove = async (id) => {
     let desc = window.prompt("Enter desc if any");
     const res = await fetch(`/users/modify-request/${id}`, {
@@ -51,14 +51,16 @@ const Display = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 650);
-      window.open(`${base}/users/get-request`);
+      // window.open(`${base}/users/get-request`);
+      navigate("/users/");
     } else {
       console.log("error");
       errorNotify("Please respond again");
       // setInterval(() => {
-        
+
       // }, 650);
-      window.open(`${base}/users/get-request-page`);
+      // window.open(`${base}/users/get-request-page`);
+      navigate("/users/");
     }
   };
   const handleDeleteRequest = async (id) => {
@@ -81,13 +83,14 @@ const Display = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 650);
-      window.open(`${base}/users/get-request`);
+      navigate("/users/");
     } else {
       console.log("Error");
       errorNotify("Error,, try again!!");
       // setInterval(() => {
       // }, 650);
-      window.open(`${base}/users/get-request-page`,"_self");
+      // window.open(`${base}/users/get-request-page`, "_self");
+      navigate("/users/");
     }
   };
   return (

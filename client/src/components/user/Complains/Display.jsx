@@ -10,11 +10,11 @@ import {
   IconButton,
 } from "@mui/material";
 import { toast } from "react-toastify";
-// import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
 import ClearIcon from "@mui/icons-material/Clear";
-import { base } from "../../../url/url";
+// import { base } from "../../../url/url";
 
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -26,7 +26,7 @@ const sucessNotify = (msg) => {
 const Display = (props) => {
   const { complain, uid } = props;
   const [cookie] = useCookies();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // console.log("Id-:", uid);
   const getDate = (givenDate) => {
@@ -66,7 +66,7 @@ const Display = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 100);
-      window.open(`${base}/users/get-complains`, "_self");
+      navigate("/users/");
     }
   };
 
@@ -92,7 +92,8 @@ const Display = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 100);
-      window.open(`${base}/users/get-complains`, "_self");
+      // window.open(`${base}/users/get-complains`, "_self");
+      navigate("/users/");
     }
   };
 

@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import {  useNavigate } from "react-router-dom";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
-import { base } from "../../../url/url";
+// import { base } from "../../../url/url";
 
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -64,7 +64,7 @@ const LeaveTable = (props) => {
       // setInterval(() => {
       // }, 100);
       // window.open(`${base}/users/get-leave-page`,"_self");
-      navigate('/users/get-leave-page')
+      navigate('/users/')
       
     }
   };
