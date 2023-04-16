@@ -12,13 +12,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import {base} from "../../url/url"
 
 const Approve = () => {
   const ErrorNotify = (msg) => toast.error(`${msg}`);
   const SuccessNotify = (msg) => toast.success(`${msg}`);
   const params = useParams();
   const { id } = params;
-  console.log("id", id);
   const [leave, setLeave] = useState({});
   const [loading, setLoading] = useState(true);
   const getRequest = async () => {
@@ -37,7 +37,7 @@ const Approve = () => {
     } else if (response.status === 200) {
       const res = await response.json();
       const { data } = res;
-      console.log("Data Back-:", data);
+      // console.log("Data Back-:", data);
       setLeave(data);
       setLoading(false);
     } else {
@@ -66,7 +66,7 @@ const Approve = () => {
       const response = await res.json();
       const { message } = response;
       SuccessNotify(message);
-      window.location.reload();
+      window.open(`${base}/leave/${id}`);
     } else {
       console.log("error");
       ErrorNotify("Error");
