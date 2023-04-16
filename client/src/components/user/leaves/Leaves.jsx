@@ -11,7 +11,11 @@ import React, { useEffect, useState } from "react";
 import HeaderUsers from "../Navigation/HeaderUsers";
 import LeaveTable from "./LeaveTable";
 import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 
+const errorNotify = (msg) => {
+  toast.error(`${msg}`);
+};
 const Leaves = (props) => {
   const [leaves, setLeave] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -28,16 +32,18 @@ const Leaves = (props) => {
     });
     if (!res.status === 200) {
       console.log("Error");
+      errorNotify("Error in finding please try again");
+      setLoading(true);
     } else {
       const databack = await res.json();
       const { data } = databack;
-      setInterval(() => {
-        setLoading(false);
-      }, 1000);
       // console.log("Called me",data);
       setLeave((prev) => {
         return [...data];
       });
+      setInterval(() => {
+        setLoading(false);
+      }, 100);
     }
   };
 

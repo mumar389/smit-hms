@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import {base} from "../../url/url"
+import { base } from "../../url/url";
 
 const Approve = () => {
   const ErrorNotify = (msg) => toast.error(`${msg}`);
@@ -32,7 +32,7 @@ const Approve = () => {
       // console.log("unable to find leave");
       const res = await response.json();
       const { message } = res;
-      console.log(message);
+      ErrorNotify(message);
       setLoading(true);
     } else if (response.status === 200) {
       const res = await response.json();
@@ -42,6 +42,7 @@ const Approve = () => {
       setLoading(false);
     } else {
       console.log("error");
+      ErrorNotify("Error Please try again");
       setLoading(true);
     }
   };

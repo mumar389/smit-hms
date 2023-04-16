@@ -75,7 +75,10 @@ function App() {
             element={<Protected Component={Notify} />}
           />
           <Route path="all-req" element={<Protected Component={AllReq} />} />
-          <Route path="get-leave" element={<Protected Component={AllLeave} />} />
+          <Route
+            path="get-leave"
+            element={<Protected Component={AllLeave} />}
+          />
         </Route>
         <Route
           path="/users/"
@@ -121,6 +124,7 @@ function App() {
           }
         >
           <Route
+            index
             path="dashboard"
             element={<WardenAuth Component={DashboardWarden} />}
           />

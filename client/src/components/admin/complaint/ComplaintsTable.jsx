@@ -64,7 +64,7 @@ const ComplaintsTable = (props) => {
       sucessNotify(message);
       setInterval(() => {
         window.open(`${base}/admin/complains`);
-      }, 900);
+      }, 650);
     }
   };
 

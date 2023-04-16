@@ -21,7 +21,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Card, CardContent, IconButton, InputAdornment } from "@mui/material";
 import HeaderUsers from "../Navigation/HeaderUsers";
-import { base } from "../../../url/url";
+// import { base } from "../../../url/url";
 
 const theme = createTheme();
 const ErrorNotify = () => toast.error("Invalid Username or password!");
@@ -58,13 +58,10 @@ function SignIn() {
       // console.log("Failed to login");
       ErrorNotify();
     } else {
-      // const res = await response.json();
-      // console.log("Backend response-:", res);
       SuccessNotify();
-      // setInterval(() => {
-      //   window.open(`${base}/users/`, "_self");
-      // }, 650);
-      navigate('/users/');
+      setInterval(() => {
+        navigate("/users/");
+      }, 650);
     }
   };
   React.useEffect(() => {

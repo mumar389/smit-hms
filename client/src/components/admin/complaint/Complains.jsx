@@ -12,12 +12,15 @@ import React, { useEffect, useState } from "react";
 import Header from "../Navigation/Header";
 import ComplaintsTable from "./ComplaintsTable";
 import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 
 const Complains = () => {
   const [complaints, setComplpaints] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cookie] = useCookies();
-
+  const errorNotify = (msg) => {
+    toast.error(`${msg}`);
+  };
   const fetchComplains = async () => {
     setLoading(true);
     const res = await fetch("/admin/get-complain", {
@@ -29,13 +32,14 @@ const Complains = () => {
     });
     if (!(res.status === 200)) {
       setLoading(false);
-      console.log("Error in fetching");
+      // console.log("Error in fetching");
+      errorNotify("Error in fetching")
     } else {
       const databack = await res.json();
       const { data } = databack;
       setInterval(() => {
         setLoading(false);
-      }, 1000);
+      }, 650);
       setComplpaints(data);
     }
   };

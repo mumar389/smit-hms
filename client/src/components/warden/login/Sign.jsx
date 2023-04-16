@@ -59,7 +59,7 @@ const Sign = () => {
       SuccessNotify();
       setInterval(() => {
         window.open(`${base}/warden/dashboard`, "_self");
-      }, 1000);
+      }, 100);
     }
   };
   React.useEffect(() => {

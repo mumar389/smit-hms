@@ -34,7 +34,7 @@ const LeaveReq = (props) => {
       const { data } = databack;
       setInterval(() => {
         setLoading(false);
-      }, 1000);
+      }, 100);
       setLeave(data);
     }
   };

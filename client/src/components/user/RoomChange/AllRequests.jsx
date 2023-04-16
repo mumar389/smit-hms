@@ -11,7 +11,11 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import HeaderUsers from "../Navigation/HeaderUsers";
 import Display from "./Display";
+import { toast } from "react-toastify";
 
+const errorNotify = (msg) => {
+  toast.error(`${msg}`);
+};
 const AllRequests = ({ user, mate }) => {
   const [loading, setLoading] = useState(true);
   const [cookie] = useCookies();
@@ -27,7 +31,7 @@ const AllRequests = ({ user, mate }) => {
     if (res.status === 301 || res.status === 302) {
       const resp = await res.json();
       const { message } = resp;
-      console.log(message);
+      errorNotify(message);
       setLoading(false);
     } else if (res.status === 200) {
       const response = await res.json();
@@ -36,6 +40,7 @@ const AllRequests = ({ user, mate }) => {
       setLoading(false);
     } else {
       console.log("error");
+      errorNotify("Error please try again");
       setLoading(true);
     }
   };

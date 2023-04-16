@@ -34,12 +34,12 @@ const GetComplain = (props) => {
     } else {
       const data = await res.json();
       const { complains } = data;
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
       setComplains((prev) => {
         return [...complains];
       });
+      setTimeout(() => {
+        setLoading(false);
+      }, 650);
     }
   };
 
