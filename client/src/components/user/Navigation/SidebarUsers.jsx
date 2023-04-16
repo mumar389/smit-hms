@@ -129,7 +129,7 @@ const SideBarUsers = (props) => {
       icon: <AiOutlineForm />,
     },
     {
-      path: "/users/get-leave",
+      path: "/users/get-leave-page",
       name: "Leaves",
       icon: <TbListDetails />,
     },

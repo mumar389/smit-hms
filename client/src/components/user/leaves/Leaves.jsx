@@ -18,10 +18,10 @@ const errorNotify = (msg) => {
 };
 const Leaves = (props) => {
   const [leaves, setLeave] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [cookie] = useCookies();
   const { user } = props;
-  const fetchComplains = async (e) => {
+  const fetchComplains = async () => {
     setLoading(true);
     const res = await fetch("/users/get-leave", {
       method: "GET",
@@ -30,20 +30,23 @@ const Leaves = (props) => {
         Authorization: `Bearer ${cookie.jwt}`,
       },
     });
-    if (!res.status === 200) {
+    if (res.status === 301) {
       console.log("Error");
-      errorNotify("Error in finding please try again");
+      const databack = await res.json();
+      const { message } = databack;
+      errorNotify(message);
       setLoading(true);
-    } else {
+    } else if (res.status === 200) {
       const databack = await res.json();
       const { data } = databack;
-      // console.log("Called me",data);
       setLeave((prev) => {
         return [...data];
       });
-      // setInterval(() => {
-      // }, 100);
       setLoading(false);
+    } else {
+      console.log("Error");
+      errorNotify("Error in finding please try again");
+      setLoading(true);
     }
   };
 

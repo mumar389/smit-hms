@@ -109,7 +109,7 @@ function App() {
             path="get-request"
             element={<AuthUser Component={AllRequests} />}
           />
-          <Route path="get-leave" element={<AuthUser Component={Leaves} />} />
+          <Route path="get-leave-page" element={<AuthUser Component={Leaves} />} />
           <Route
             path="leave-req"
             element={<AuthUser Component={LeaveForm} />}
