@@ -66,7 +66,7 @@ const Display = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 100);
-      window.open(`${base}/users/get-complains`);
+      window.open(`${base}/users/get-complains`, "_self");
     }
   };
 
@@ -92,7 +92,7 @@ const Display = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 100);
-      window.open(`${base}/users/get-complains`);
+      window.open(`${base}/users/get-complains`, "_self");
     }
   };
 

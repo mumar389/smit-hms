@@ -67,7 +67,7 @@ const Approve = () => {
       const response = await res.json();
       const { message } = response;
       SuccessNotify(message);
-      window.open(`${base}/leave/${id}`);
+      window.open(`${base}/leave/${id}`, "_self");
     } else {
       console.log("error");
       ErrorNotify("Error");

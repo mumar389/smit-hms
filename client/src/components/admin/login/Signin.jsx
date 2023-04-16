@@ -2,9 +2,7 @@ import {
   Button,
   Card,
   CardContent,
-  Checkbox,
   Container,
-  FormControlLabel,
   IconButton,
   InputAdornment,
   TextField,
@@ -58,7 +56,7 @@ const Signin = () => {
       const res = await response.json();
       console.log("Bckend response-:", res);
       SuccessNotify();
-      navigate('/admin/dashboard');
+      navigate("/admin/dashboard");
     }
   };
   React.useEffect(() => {
@@ -172,10 +170,6 @@ const Signin = () => {
                         }}
                       />
 
-                      <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                      />
                       <Button
                         type="submit"
                         fullWidth

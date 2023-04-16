@@ -11,7 +11,7 @@ import {
 import { toast } from "react-toastify";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useCookies } from "react-cookie";
-import {base} from "../../../url/url"
+import { base } from "../../../url/url";
 
 const errorNotify = (msg) => {
   toast.error(`${msg}`);
@@ -63,7 +63,7 @@ const LeaveTable = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 100);
-      window.open(`${base}/warden/dashboard`);
+      window.open(`${base}/warden/dashboard`, "_self");
     }
   };
 
