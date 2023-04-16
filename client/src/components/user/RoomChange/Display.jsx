@@ -58,7 +58,7 @@ const Display = (props) => {
       // setInterval(() => {
         
       // }, 650);
-      window.open(`${base}/users/get-request`);
+      window.open(`${base}/users/get-request-page`);
     }
   };
   const handleDeleteRequest = async (id) => {
@@ -87,7 +87,7 @@ const Display = (props) => {
       errorNotify("Error,, try again!!");
       // setInterval(() => {
       // }, 650);
-      window.open(`${base}/users/get-request`,"_self");
+      window.open(`${base}/users/get-request-page`,"_self");
     }
   };
   return (
