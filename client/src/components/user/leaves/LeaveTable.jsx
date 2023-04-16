@@ -81,11 +81,11 @@ const LeaveTable = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell>Sl No</TableCell>
+                <TableCell>Leave No</TableCell>
                 <TableCell>Reason</TableCell>
                 <TableCell>from</TableCell>
                 <TableCell>to</TableCell>
                 <TableCell>Student Name</TableCell>
-                <TableCell>Reg_No</TableCell>
                 <TableCell>Parent Status</TableCell>
                 <TableCell>Warden Status</TableCell>
                 <TableCell>Clear</TableCell>
@@ -95,11 +95,11 @@ const LeaveTable = (props) => {
               {leaves.map((comp, index) => (
                 <TableRow key={comp._id}>
                   <TableCell>{index + 1}</TableCell>
+                  <TableCell>{comp.leaveNo}</TableCell>
                   <TableCell>{comp.reason}</TableCell>
                   <TableCell>{getDate(comp.from)}</TableCell>
                   <TableCell>{getDate(comp.to)}</TableCell>
                   <TableCell>{comp.user.name}</TableCell>
-                  <TableCell>{comp.user.reg_no}</TableCell>
                   <TableCell>{comp.parentApproval}</TableCell>
                   <TableCell>{comp.wardenApproval}</TableCell>
                   <TableCell>

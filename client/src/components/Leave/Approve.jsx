@@ -148,6 +148,9 @@ const Approve = () => {
                       Leave Request
                     </Typography>
                     <Typography variant="h5">
+                      Leave Number-:{leave.leaveNo}
+                    </Typography>
+                    <Typography variant="h5">
                       Student Name-:{leave.user.name}
                     </Typography>
                     <Typography variant="h5">
