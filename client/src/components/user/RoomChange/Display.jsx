@@ -49,15 +49,16 @@ const Display = (props) => {
       const response = await res.json();
       const { message } = response;
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/users/get-request`);
-      }, 650);
+      // setInterval(() => {
+      // }, 650);
+      window.open(`${base}/users/get-request`);
     } else {
       console.log("error");
       errorNotify("Please respond again");
-      setInterval(() => {
-        window.location.reload();
-      }, 650);
+      // setInterval(() => {
+        
+      // }, 650);
+      window.open(`${base}/users/get-request`);
     }
   };
   const handleDeleteRequest = async (id) => {
@@ -78,15 +79,15 @@ const Display = (props) => {
       const resp = await res.json();
       const { message } = resp;
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/users/get-request`);
-      }, 650);
+      // setInterval(() => {
+      // }, 650);
+      window.open(`${base}/users/get-request`);
     } else {
       console.log("Error");
       errorNotify("Error,, try again!!");
-      setInterval(() => {
-        window.open(`${base}/users/get-request`);
-      }, 650);
+      // setInterval(() => {
+      // }, 650);
+      window.open(`${base}/users/get-request`);
     }
   };
   return (

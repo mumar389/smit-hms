@@ -740,7 +740,8 @@ module.exports.applyLeave = async (req, res) => {
     const authToken = process.env.AUTH_TOKEN;
     const twNumber = process.env.TWN_NO;
     const client = require("twilio")(accountSid, authToken);
-    const msgBody = `Your ward ${req.user.name} has request for leave, please verify and respond on our website accordingly https://smit-hms.vercel.app/leave/${newLeave.id}`;
+    const msgBody = `Sikkim Manipal Institute Of Technology
+    Your ward ${req.user.name} has request for leave, Kindly check in/verify and provide your response on https://smit-hms.vercel.app/leave/${newLeave.id}`;
     client.messages
       .create({
         body: msgBody,

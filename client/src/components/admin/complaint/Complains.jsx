@@ -37,9 +37,9 @@ const Complains = () => {
     } else {
       const databack = await res.json();
       const { data } = databack;
-      setInterval(() => {
-        setLoading(false);
-      }, 650);
+      // setInterval(() => {
+      // }, 650);
+      setLoading(false);
       setComplpaints(data);
     }
   };

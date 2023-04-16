@@ -29,9 +29,9 @@ export default function Navbar() {
     } else {
       //console.log("Logout sucessfull");
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/`, "_self");
-      }, 100);
+      // setInterval(() => {
+      // }, 100);
+      window.open(`${base}/`, "_self");
       // navigate('/admin/signin')
     }
   };
@@ -52,9 +52,9 @@ export default function Navbar() {
     } else {
       //console.log("Logout sucessfull");
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/`, "_self");
-      }, 600);
+      // setInterval(() => {
+      // }, 600);
+      window.open(`${base}/`, "_self");
       // navigate('/admin/signin')
     }
   };
@@ -72,10 +72,10 @@ export default function Navbar() {
       ErrorNotify();
     } else {
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/`, "_self");
-
-      }, 600);
+      // setInterval(() => {
+        
+      // }, 600);
+      window.open(`${base}/`, "_self");
     }
   };
 

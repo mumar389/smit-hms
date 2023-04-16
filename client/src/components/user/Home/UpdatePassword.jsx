@@ -72,9 +72,9 @@ const UpdatePassword = () => {
       const res = await response.json();
       console.log("Bckend response-:", res);
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/users/`, "_self");
-      }, 600);
+      // setInterval(() => {
+      // }, 600);
+      window.open(`${base}/users/`, "_self");
     }
   };
   return (

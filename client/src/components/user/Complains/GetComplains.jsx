@@ -37,9 +37,9 @@ const GetComplain = (props) => {
       setComplains((prev) => {
         return [...complains];
       });
-      setTimeout(() => {
-        setLoading(false);
-      }, 650);
+      // setTimeout(() => {
+      // }, 650);
+      setLoading(false);
     }
   };
 

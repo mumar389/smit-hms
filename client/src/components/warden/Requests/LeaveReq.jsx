@@ -32,10 +32,8 @@ const LeaveReq = (props) => {
     } else {
       const databack = await res.json();
       const { data } = databack;
-      setInterval(() => {
-        setLoading(false);
-      }, 100);
       setLeave(data);
+      setLoading(false);
     }
   };
 

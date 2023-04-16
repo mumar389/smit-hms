@@ -36,9 +36,9 @@ const AuthUser = (props) => {
     if (!(res.status === 200)) {
       console.log("Error");
       // errorNotify();
-      setInterval(() => {
-        window.open(`${base}/users/signin`, "_self");
-      }, 100);
+      // setInterval(() => {
+      // }, 100);
+      window.open(`${base}/users/signin`, "_self");
     } else {
       const data = await res.json();
       const { assigned } = data;

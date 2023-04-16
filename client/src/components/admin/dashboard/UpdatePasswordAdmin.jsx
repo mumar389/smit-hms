@@ -75,9 +75,9 @@ const UpdatePasswordAdmin = () => {
       // const res = await response.json();
       // console.log(res);
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/admin/dashboard`, "_self");
-      }, 600);
+      // setInterval(() => {
+      // }, 600);
+      window.open(`${base}/admin/dashboard`, "_self");
     }
   };
   return (

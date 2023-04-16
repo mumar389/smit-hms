@@ -164,9 +164,7 @@ const SideBarUsers = (props) => {
     } else {
       //console.log("Logout sucessfull");
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/users/signin`, "_self");
-      }, 600);
+      window.open(`${base}/users/signin`, "_self");
       // navigate('/admin/signin')
     }
   };

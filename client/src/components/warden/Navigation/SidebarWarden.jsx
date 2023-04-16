@@ -139,11 +139,7 @@ const SidebarWarden = () => {
       ErrorNotify();
     } else {
       SuccessNotify();
-      // setInterval(() => {
-      // }, 100);
-      setInterval(() => {
-        navigate("/");
-      }, 100);
+      navigate("/");
     }
   };
   return (

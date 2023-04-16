@@ -61,9 +61,9 @@ const LeaveTable = (props) => {
       const { message } = await res.json();
       console.log(`${message}`);
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/warden/dashboard`);
-      }, 100);
+      // setInterval(() => {
+      // }, 100);
+      window.open(`${base}/warden/dashboard`);
     }
   };
 

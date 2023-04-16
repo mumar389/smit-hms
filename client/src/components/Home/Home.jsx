@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import { Box, Card } from "@mui/material";
+import { Box } from "@mui/material";
 import home_page from "../../assets/images/home_page.jpg";
 
 const Home = () => {

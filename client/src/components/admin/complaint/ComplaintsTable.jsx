@@ -62,9 +62,9 @@ const ComplaintsTable = (props) => {
       const response = await res.json();
       const { message } = response;
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/admin/complains`);
-      }, 650);
+      // setInterval(() => {
+      // }, 650);
+      window.open(`${base}/admin/complains`);
     }
   };
 

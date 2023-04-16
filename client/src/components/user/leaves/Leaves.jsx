@@ -41,9 +41,9 @@ const Leaves = (props) => {
       setLeave((prev) => {
         return [...data];
       });
-      setInterval(() => {
-        setLoading(false);
-      }, 100);
+      // setInterval(() => {
+      // }, 100);
+      setLoading(false);
     }
   };
 

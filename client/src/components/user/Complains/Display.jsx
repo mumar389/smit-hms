@@ -64,9 +64,9 @@ const Display = (props) => {
       const { message } = await res.json();
       // console.log(`${message}`);
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/users/get-complains`);
-      }, 100);
+      // setInterval(() => {
+      // }, 100);
+      window.open(`${base}/users/get-complains`);
     }
   };
 
@@ -90,9 +90,9 @@ const Display = (props) => {
       const { message } = await res.json();
       // console.log(`${message}`);
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/users/get-complains`);
-      }, 100);
+      // setInterval(() => {
+      // }, 100);
+      window.open(`${base}/users/get-complains`);
     }
   };
 

@@ -61,9 +61,9 @@ const LeaveTable = (props) => {
       const { message } = await res.json();
       // console.log(`${message}`);
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/users/get-leave`);
-      }, 100);
+      // setInterval(() => {
+      // }, 100);
+      window.open(`${base}/users/get-leave`);
     }
   };
 

@@ -165,9 +165,7 @@ const Sidebar = (props) => {
       ErrorNotify();
     } else {
       SuccessNotify();
-      setInterval(() => {
-        window.open(`${base}/admin/signin`, "_self");
-      }, 100);
+      window.open(`${base}/admin/signin`, "_self");
     }
   };
 

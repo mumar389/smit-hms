@@ -36,12 +36,12 @@ const AllLeave = (props) => {
     } else {
       const databack = await res.json();
       const { data } = databack;
-      setInterval(() => {
-        setLoading(false);
-      }, 1000);
+      // setInterval(() => {
+      // }, 1000);
       setLeave((prev) => {
         return [...data];
       });
+      setLoading(false);
     }
   };
   const handleNumberChange = (e) => {

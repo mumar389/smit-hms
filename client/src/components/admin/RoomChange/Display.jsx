@@ -46,9 +46,9 @@ const Display = (props) => {
       const response = await res.json();
       const { message } = response;
       sucessNotify(message);
-      setInterval(() => {
-        window.open(`${base}/admin/all-req`, "_self");
-      }, 650);
+      // setInterval(() => {
+      // }, 650);
+      window.open(`${base}/admin/all-req`, "_self");
     } else {
       console.log("error");
       errorNotify("Please respond again");
