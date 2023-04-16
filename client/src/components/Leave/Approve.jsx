@@ -123,7 +123,7 @@ const Approve = () => {
           >
             <Card
               sx={{
-                width: "70%",
+                width: "100%",
                 height: "70vh",
                 opacity: 0.9,
                 boxShadow: 5,

@@ -63,7 +63,8 @@ const LeaveTable = (props) => {
       sucessNotify(message);
       // setInterval(() => {
       // }, 100);
-      window.open(`${base}/users/get-leave`);
+      // window.open(`${base}/users/get-leave`);
+      window.location.reload();
     }
   };
 
