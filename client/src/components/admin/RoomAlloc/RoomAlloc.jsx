@@ -24,6 +24,7 @@ import Header from "../Navigation/Header";
 import SingleRoom from "./SingleRoom";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
+import UploadFile from "./UploadFile"
 const steps = ["First User Details", "Second User Details"];
 const ErrorNotify = () =>
   toast.error("Error in submitting the details, please retry again!");
@@ -525,6 +526,11 @@ const RoomAlloc = () => {
                       control={<Radio />}
                       label="Single"
                     />
+                    <FormControlLabel
+                      value="sheet"
+                      control={<Radio />}
+                      label="Upload Excel Sheet"
+                    />
                   </RadioGroup>
                 </FormControl>
                 {type === "double" && (
@@ -533,6 +539,7 @@ const RoomAlloc = () => {
                   </>
                 )}
                 {type === "single" && <SingleRoom />}
+                {type === "sheet" && <UploadFile />}
               </CardContent>
             </Card>
           </Container>
