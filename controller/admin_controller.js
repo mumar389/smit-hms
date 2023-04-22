@@ -9,6 +9,8 @@ const Complain = require("../models/complain");
 const moment = require("moment");
 const Change = require("../models/roomChange");
 const Leave = require("../models/leave");
+const xlsx = require("xlsx");
+const upload = multer({}).single("file");
 
 //admin-home
 module.exports.home = async (req, res) => {
@@ -1058,6 +1060,99 @@ module.exports.getLeaveByNumber = async (req, res) => {
     return res.status(200).json({
       message: "Got Your Leave",
       data: currentLeave,
+    });
+  } catch (error) {
+    return res.status(501).json({
+      message: "Internal server error",
+    });
+  }
+};
+const getUser = (room) => {
+  if (room.user1 === null) {
+    return "user1";
+  } else if (room.user2 === null) {
+    return "user2";
+  }
+};
+//handle-excel file
+module.exports.getFile = async (req, res) => {
+  try {
+    upload(req, res, async function (err) {
+      if (err) {
+        console.log(err);
+        return res.status(301).json({
+          message: err,
+        });
+      }
+      if (req.file) {
+        const fileBuffer = req.file.buffer;
+        // console.log("body", fileBuffer);
+        const workbook = xlsx.read(fileBuffer);
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const data = xlsx.utils.sheet_to_json(sheet);
+        // console.log("Data", data);
+        for (let d of data) {
+          const hashPassword = await bcrypt.hash(
+            `${d.Registration_Number}`,
+            saltRounds
+          );
+          // console.log(hashPassword);
+          let newUser = await User.create({
+            name: d.Name,
+            reg_no: d.Registration_Number,
+            password: hashPassword,
+            year: d.Year,
+          });
+          let roomWithOne = await Room.findOne({
+            status: "Available",
+            type: "Double",
+            personCount: 1,
+          });
+          let roomWithZero = await Room.findOne({
+            status: "Available",
+            type: "Double",
+            personCount: 0,
+          });
+          if (!roomWithOne) {
+            //zero vala room lo
+            // console.log("Zero me aaya");
+            let userType = getUser(roomWithZero);
+            roomWithZero[userType] = newUser._id;
+            roomWithZero.personCount += 1;
+            if (
+              roomWithZero.personCount === 1 ||
+              roomWithZero.personCount === 0
+            ) {
+              roomWithZero.status = "Available";
+            }
+            roomWithZero.save();
+            newUser.room = roomWithZero._id;
+            newUser.save();
+          } else {
+            // console.log("One me aaya");
+            if (roomWithOne.personCount === 1) {
+              roomWithOne.status = "Not Available";
+            } else {
+              roomWithOne.status = "Available";
+            }
+            let userType = getUser(roomWithOne);
+            roomWithOne[userType] = newUser._id;
+            roomWithOne.personCount += 1;
+            roomWithOne.save();
+            newUser.room = roomWithOne._id;
+            newUser.save();
+          }
+        }
+        return res.status(200).json({
+          message: "User Registered and Room Allocated successfully",
+        });
+      } else {
+        // console.log(req.file);
+        return res.status(301).json({
+          message: "No File Present",
+        });
+      }
     });
   } catch (error) {
     return res.status(501).json({

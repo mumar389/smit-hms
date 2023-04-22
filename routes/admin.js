@@ -16,6 +16,10 @@ router.post(
   adminAuth.Authenticate,
   adminControl.registerUser
 );
+router.post(
+  "/handle-file",
+  adminControl.getFile
+);
 router.get("/verify-admin", adminAuth.Authenticate, adminControl.home);
 
 // //single room
