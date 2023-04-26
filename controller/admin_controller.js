@@ -833,7 +833,13 @@ const getCurrentId = (room, cid) => {
     return "user2";
   }
 };
-
+const getUser = (room) => {
+  if (room.user1 === null) {
+    return "user1";
+  } else if (room.user2 === null) {
+    return "user2";
+  }
+};
 module.exports.allocateNewRoom = async (req, res) => {
   try {
     const request_id = req.params.id;
@@ -1300,13 +1306,7 @@ module.exports.getLeaveByNumber = async (req, res) => {
     });
   }
 };
-const getUser = (room) => {
-  if (room.user1 === null) {
-    return "user1";
-  } else if (room.user2 === null) {
-    return "user2";
-  }
-};
+
 //handle-excel file
 module.exports.getFile = async (req, res) => {
   try {

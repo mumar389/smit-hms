@@ -52,9 +52,9 @@ const Swap = () => {
       userNotify(message);
       setRegNo("");
       setReason("");
-      setInterval(() => {
-        navigate("/users/get-request");
-      }, 650);
+      navigate("/users/get-request-page");
+      // setInterval(() => {
+      // }, 650);
     }
   };
   return (
