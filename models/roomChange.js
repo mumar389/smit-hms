@@ -26,9 +26,15 @@ const roomChangeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    shiftCount: {
+      type: Number,
+    },
     changeType: {
       type: String,
       required: true,
+    },
+    allocationType: {
+      type: String,
     },
     currentRoom: {
       type: mongoose.Schema.Types.ObjectId,
