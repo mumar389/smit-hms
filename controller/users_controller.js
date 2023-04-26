@@ -433,7 +433,7 @@ module.exports.roomChangeRequest = async (req, res) => {
     const { changeType } = req.body;
     console.log(changeType);
     if (changeType === "New") {
-      const { reason, number, floor, segment } = req.body;
+      const { reason, number, floor, segment, type, count } = req.body;
       let currentUser = req.user;
 
       if (
@@ -453,31 +453,78 @@ module.exports.roomChangeRequest = async (req, res) => {
         floor,
         segment,
         status: "Available",
-        personCount: 0,
       });
-      if (!newReqRoom) {
+      if (!newReqRoom || newReqRoom.personCount === 2) {
         return res.status(301).json({
           message: "please enter an available room number!",
         });
       }
-      let newRequest = await Change.create({
-        reason,
-        changeType,
-        requestBy: currentUser._id,
-        currentRoom: currentUser.room,
-        newDetails: {
-          rno: number,
-          floor: floor,
-          segment: segment,
-        },
-      });
-      if (!newRequest) {
-        return res.status(302).json({
-          message: "Unable to create a request",
+      if (
+        (newReqRoom.personCount > 0 && type === "Single") ||
+        (newReqRoom.personCount > 0 && type === "Double" && count === 2)
+      ) {
+        return res.status(301).json({
+          message: "Room is not available !",
         });
-      } else {
+      }
+      if (type === "Double") {
+        let newRequest = await Change.create({
+          reason,
+          changeType,
+          requestBy: currentUser._id,
+          currentRoom: currentUser.room,
+          allocationType: type,
+          shiftCount: count,
+          newDetails: {
+            rno: number,
+            floor: floor,
+            segment: segment,
+          },
+        });
+        if (!newRequest) {
+          return res.status(302).json({
+            message: "Unable to create a request",
+          });
+        } else {
+          return res.status(200).json({
+            message: "Request Created Successfully",
+          });
+        }
+      } else if (type === "Single") {
+        // let newRoom = await Room.findOne({
+        //   number,
+        //   segment,
+        //   floor,
+        //   status: "Available",
+        //   personCount: 0,
+        // });
+        if (newReqRoom.user1 !== null || newReqRoom.user2 !== null) {
+          return res.status(301).json({
+            message: "please enter an available room details😪",
+          });
+        }
+        let singleRoomReq = await Change.create({
+          reason,
+          changeType,
+          requestBy: req.user.id,
+          currentRoom: req.user.room,
+          allocationType: type,
+          shiftCount: count,
+          newDetails: {
+            rno: number,
+            segment,
+            floor,
+          },
+        });
+        if (!singleRoomReq) {
+          return res.status(301).json({
+            message: "Error  please try again😢!",
+          });
+        }
+
         return res.status(200).json({
-          message: "Request Created Successfully",
+          message:
+            "You request has been submitted,, wait for admin to verify!😀",
         });
       }
     } else if (changeType === "Swap") {
@@ -514,7 +561,9 @@ module.exports.roomChangeRequest = async (req, res) => {
           message: "Request is placed, wait for Admin to approve",
         });
       }
-    } else if (changeType === "Single") {
+    } else {
+      /*
+    else if (changeType === "Single") {
       const { reason, changeType, number, segment, floor } = req.body;
 
       if (!reason || !changeType || !number || !floor || !segment) {
@@ -555,7 +604,8 @@ module.exports.roomChangeRequest = async (req, res) => {
       return res.status(200).json({
         message: "You request has been submitted,, wait for admin to verify!😀",
       });
-    } else {
+    }
+    */
       console.log("else me aa gya");
       return res.status(301).json({
         message: "Inside Else",
