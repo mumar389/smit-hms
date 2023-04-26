@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 
 const UploadFile = () => {
@@ -61,7 +61,10 @@ const UploadFile = () => {
       ) : (
         <></>
       )}
-
+      <Box sx={{ m: 2, color: "black", fontFamily: "bolder" }}>
+        <Typography>Must Include the below mentioned columns!!</Typography>
+        <Typography>Column-: Name,Registration_Number,Year</Typography>
+      </Box>
       <Box sx={{ width: "100%" }}>
         <div>
           <form encType="multipart/form-data" onSubmit={handleSubmit}>

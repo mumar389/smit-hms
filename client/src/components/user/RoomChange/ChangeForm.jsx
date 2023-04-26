@@ -21,7 +21,7 @@ import HeaderUsers from "../Navigation/HeaderUsers";
 import SwapForm from "./SwapForm";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
-import SingleForm from "./SingleForm";
+// import SingleForm from "./SingleForm";
 import { base } from "../../../url/url";
 const ErrorNotify = (msg) => toast.error(`${msg}`);
 const userNotify = (data) => toast.success(`${data}`);
@@ -33,6 +33,8 @@ const NewRoom = () => {
     floor: 1,
     segment: "",
     roomNo: 0,
+    count: 2,
+    type: "Double",
   });
   const handleRoom = async (e) => {
     const { name, value } = e.target;
@@ -63,6 +65,8 @@ const NewRoom = () => {
         number: room.roomNo,
         floor: room.floor,
         segment: room.segment,
+        type: room.type,
+        count: room.count,
       }),
     });
     if (res.status === 301 || res.status === 422) {
@@ -74,9 +78,7 @@ const NewRoom = () => {
       const response = await res.json();
       const { message } = response;
       userNotify(message);
-      setInterval(() => {
-        window.open(`${base}/users/change-request`, "_self");
-      }, 650);
+      window.open(`${base}/users/change-request`, "_self");
     }
   };
   return (
@@ -137,7 +139,7 @@ const NewRoom = () => {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid xs={12} sm={6} item>
+              <Grid xs={12} sm={6} item sx={{ mb: 2 }}>
                 <TextField
                   onChange={handleRoom}
                   name="segment"
@@ -149,6 +151,66 @@ const NewRoom = () => {
                   required
                 />
               </Grid>
+              <Grid item xs={5} sm={6} sx={{ mt: 1 }}>
+                <FormControl sx={{ width: "50%" }}>
+                  <InputLabel id="demo-simple-select-label" sx={{ mb: 2 }}>
+                    Count of Students Want To Change
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={room.count}
+                    label="Count"
+                    name="count"
+                    onChange={handleRoom}
+                  >
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              {room.count === 1 ? (
+                <>
+                  <Grid item xs={5} sm={6}>
+                    <FormControl sx={{ width: "50%" }}>
+                      <InputLabel id="demo-simple-select-label">
+                        Room Type
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={room.type}
+                        label="Type"
+                        name="type"
+                        onChange={handleRoom}
+                      >
+                        <MenuItem value={"Single"}>Single</MenuItem>
+                        <MenuItem value={"Double"}>Double</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid item xs={5} sm={6}>
+                    <FormControl sx={{ width: "50%" }}>
+                      <InputLabel id="demo-simple-select-label">
+                        Room Type
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={room.type}
+                        label="Type"
+                        name="type"
+                        onChange={handleRoom}
+                      >
+                        <MenuItem value={"Double"}>Double</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </>
+              )}
             </Grid>
             <Button
               sx={{ mt: 2 }}
@@ -171,16 +233,16 @@ const ChangeForm = () => {
     setType(e.target.value);
   };
 
-  const [checked, setCheck] = useState("newRoom");
-  const handleCheck = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setCheck(() => {
-      return {
-        [name]: value,
-      };
-    });
-  };
+  // const [checked, setCheck] = useState("newRoom");
+  // const handleCheck = (e) => {
+  //   e.preventDefault();
+  //   const { name, value } = e.target;
+  //   setCheck(() => {
+  //     return {
+  //       [name]: value,
+  //     };
+  //   });
+  // };
   return (
     <>
       <Box height={40}></Box>
@@ -237,12 +299,6 @@ const ChangeForm = () => {
                       control={<Radio />}
                       label="Room Mate Swap"
                     />
-                    <FormControlLabel
-                      name="single"
-                      value="single"
-                      control={<Radio />}
-                      label="To Single Room"
-                    />
                   </RadioGroup>
                 </FormControl>
                 {type === "newRoom" && (
@@ -251,7 +307,6 @@ const ChangeForm = () => {
                   </>
                 )}
                 {type === "swap" && <SwapForm />}
-                {type === "single" && <SingleForm />}
               </CardContent>
             </Card>
           </Container>
