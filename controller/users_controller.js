@@ -431,7 +431,7 @@ module.exports.logout = async (req, res) => {
 module.exports.roomChangeRequest = async (req, res) => {
   try {
     const { changeType } = req.body;
-    console.log("Ayya toh", changeType);
+    // console.log("Ayya toh", changeType);
     if (changeType === "New") {
       const { reason, number, floor, segment, type, count } = req.body;
       let currentUser = req.user;

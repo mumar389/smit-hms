@@ -840,6 +840,249 @@ const getUser = (room) => {
     return "user2";
   }
 };
+
+module.exports.allocateNewRoom = async (req, res) => {
+  try {
+    const request_id = req.params.id;
+    const currentRequest = await Change.findById(request_id);
+    if (!currentRequest) {
+      return res.status(302).json({
+        message: "Request is invalid",
+      });
+    } else {
+      const { status } = req.body;
+      if (status === "Not Approved") {
+        return res.status(301).json({
+          message: "Admin has declined the request",
+        });
+      }
+      if (currentRequest.changeType === "New") {
+        let currentRoom = await Room.findById(currentRequest.currentRoom);
+        if (!currentRoom) {
+          return res.status(301).json({
+            message: "Unable to Find Room",
+          });
+        }
+        if (currentRequest.allocationType === "Double") {
+          if (currentRoom.user2 !== null) {
+            if (
+              currentRequest.studentApproval.length === 0 ||
+              currentRequest.studentApproval[0].status !== "Approved"
+            ) {
+              return res.status(301).json({
+                message: "User has Not Entered Any Response",
+              });
+            }
+          }
+
+          if (
+            status === "Approved" ||
+            currentRequest.studentApproval[0].status === "Approved"
+          ) {
+            // console.log(currentRoom);
+            let newRoom = await Room.findOne({
+              number: currentRequest.newDetails.rno,
+              segment: currentRequest.newDetails.segment,
+              floor: currentRequest.newDetails.floor,
+            });
+            if (!newRoom) {
+              return res.status(301).json({
+                message: "Unable to Find New Room",
+              });
+            } else {
+              if (currentRequest.shiftCount === 1) {
+                const currentUserField = getCurrentId(
+                  currentRoom,
+                  currentRequest.requestBy
+                );
+                const newRoomFiled = getUser(newRoom);
+                // let t = currentRoom[currentUserField];
+                // currentRoom[currentUserField] = newRoom[newRoomFiled];
+                // newRoom[newRoomFiled] = t;
+                newRoom[newRoomFiled] = currentRoom[currentUserField];
+                currentRoom[currentUserField] = null;
+                currentRoom.personCount -= 1;
+                currentRoom.status = "Available";
+                if (currentRoom.type === "Single") {
+                  currentRoom.type = "Double";
+                }
+                currentRoom.save();
+                if (newRoom.personCount === 1) {
+                  newRoom.status = "Not Available";
+                } else {
+                  newRoom.status = "Available";
+                }
+                newRoom.personCount += 1;
+                newRoom.save();
+                let cu = await User.findById(currentRequest.requestBy);
+                cu.room = newRoom._id;
+                cu.save();
+                currentRequest.adminApproval = status;
+                currentRequest.save();
+                return res.status(200).json({
+                  message: "Room Changed Successfully",
+                });
+              } else {
+                let userId1 = currentRoom.user1;
+                let userId2 = currentRoom.user2;
+                newRoom.user1 = userId1;
+                newRoom.user2 = userId2;
+                newRoom.personCount = currentRoom.personCount;
+                if (currentRoom.personCount == 2) {
+                  newRoom.status = currentRoom.status;
+                } else newRoom.status = "Available";
+                newRoom.save();
+                currentRoom.user1 = null;
+                currentRoom.user2 = null;
+                currentRoom.personCount = 0;
+                currentRoom.status = "Available";
+                currentRoom.type = "Double";
+                currentRoom.save();
+                if (userId1 !== null) {
+                  let fullUser1 = await User.findById(userId1);
+                  fullUser1.room = newRoom._id;
+                  fullUser1.save();
+                }
+                if (userId2 !== null) {
+                  let fullUser2 = await User.findById(userId2);
+                  fullUser2.room = newRoom._id;
+                  fullUser2.save();
+                }
+                currentRequest.adminApproval = status;
+                currentRequest.save();
+                return res.status(200).json({
+                  message: "Room Changed Successfully",
+                });
+              }
+            }
+          } else {
+            return res.status(422).json({
+              message: "Room Change is not approved",
+            });
+          }
+        } else if (currentRequest.allocationType === "Single") {
+          let currentRoom = await Room.findById(currentRequest.currentRoom);
+          let currentUser = await User.findById(currentRequest.requestBy);
+          if (!currentUser) {
+            return res.status(301).json({
+              message: "No User Found",
+            });
+          }
+          if (currentRoom.user2 !== null) {
+            if (
+              currentRequest.studentApproval.length === 0 ||
+              currentRequest.studentApproval[0].status !== "Approved"
+            ) {
+              return res.status(301).json({
+                message: "User has Not Entered Any Response",
+              });
+            }
+          }
+          if (status === "Approved") {
+            const newRoom = await Room.findOne({
+              number: currentRequest.newDetails.rno,
+              floor: currentRequest.newDetails.floor,
+              segment: currentRequest.newDetails.segment,
+              personCount: 0,
+              status: "Available",
+            });
+            if (!newRoom) {
+              return res.status(301).json({
+                message: "Enter a valid room details",
+              });
+            }
+            // const rid = getRoomMateId(currentRoom, currentRequest.requestBy);
+            // console.log(rid);
+            let cuField = getCurrentId(currentRoom, currentRequest.requestBy);
+            // console.log(currentRoom[cuField]);
+            newRoom.user1 = currentRequest.requestBy;
+            newRoom.personCount += 1;
+            newRoom.status = "Not Available";
+            newRoom.type = "Single";
+            newRoom.save();
+            currentRoom[cuField] = null;
+            currentRoom.personCount--;
+            currentRoom.status = "Available";
+            if (currentRoom.type === "Single") {
+              currentRoom.type = "Double";
+            }
+            currentRoom.save();
+            currentUser.room = newRoom._id;
+            currentUser.save();
+            currentRequest.adminApproval = status;
+            currentRequest.save();
+            return res.status(200).json({
+              message: "Room changed successfully",
+            });
+          }
+        }
+      } else if (currentRequest.changeType === "Swap") {
+        const swapRoom = await Room.findById(currentRequest.swapRoom);
+        if (currentRequest.studentApproval.length < swapRoom.personCount + 1) {
+          return res.status(301).json({
+            message: "User has Not Entered Any Response",
+          });
+        }
+        currentRequest.studentApproval.map((c, i) => {
+          if (c.status !== "Approved") {
+            return res.status(301).json({
+              message: "User has not approved",
+            });
+          }
+        });
+        // console.log(swapRoom);
+        if (!swapRoom) {
+          return res.status(301).json({
+            message: "Room Does Not exist",
+          });
+        }
+        const newRoomMateId = getRoomMateId(
+          swapRoom,
+          currentRequest.newDetails.withUser
+        );
+        let swapuserField = newRoomMateId[1];
+
+        let cRoom = await Room.findById(currentRequest.currentRoom);
+        let currentuserField = getCurrentId(cRoom, currentRequest.requestBy);
+        let cuserval = cRoom[currentuserField];
+        cRoom[currentuserField] = swapRoom[swapuserField];
+        swapRoom[swapuserField] = cuserval;
+        if (swapRoom.personCount === 1) {
+          swapRoom.personCount += 1;
+        }
+        if (newRoomMateId[0] === null) {
+          cRoom.personCount -= 1;
+        }
+        cRoom.save();
+        swapRoom.save();
+        let currentUser = await User.findById(currentRequest.requestBy);
+        currentUser.room = swapRoom._id;
+        currentUser.save();
+        // console.log(currentUser);
+
+        if (newRoomMateId[0] !== null) {
+          let newMateId = await User.findById(newRoomMateId[0]);
+          newMateId.room = cRoom._id;
+          newMateId.save();
+        }
+
+        currentRequest.adminApproval = "Approved";
+        currentRequest.save();
+
+        return res.status(200).json({
+          message: `You have ${status} the request`,
+        });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json({
+      message: "Internal server error",
+    });
+  }
+};
+/*
+Changed
 module.exports.allocateNewRoom = async (req, res) => {
   try {
     const request_id = req.params.id;
@@ -1069,6 +1312,7 @@ module.exports.allocateNewRoom = async (req, res) => {
     });
   }
 };
+*/
 /*
 //room-change-to-new-room both users-:
 module.exports.allocateNewRoom = async (req, res) => {
