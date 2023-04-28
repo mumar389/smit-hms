@@ -21,14 +21,15 @@ import HeaderUsers from "../Navigation/HeaderUsers";
 import SwapForm from "./SwapForm";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 // import SingleForm from "./SingleForm";
-import { base } from "../../../url/url";
+// import { base } from "../../../url/url";
 const ErrorNotify = (msg) => toast.error(`${msg}`);
 const userNotify = (data) => toast.success(`${data}`);
 
 const NewRoom = () => {
   const [cookie] = useCookies();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [room, setRoom] = useState({
     floor: 1,
     segment: "",
@@ -78,7 +79,8 @@ const NewRoom = () => {
       const response = await res.json();
       const { message } = response;
       userNotify(message);
-      window.open(`${base}/users/change-request`, "_self");
+      // window.open(`${base}/users/change-request`, "_self");
+      navigate("/users/change-request");
     }
   };
   return (
