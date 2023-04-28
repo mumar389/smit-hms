@@ -139,9 +139,10 @@ const Display = (props) => {
                     </>
                   ) : (
                     <>
-                      {comp.studentApproval.map((c, i) => {
+                      {/* {comp.studentApproval.map((c, i) => {
                         return <TableCell>{c.status}</TableCell>;
-                      })}
+                      })} */}
+                      <TableCell>{comp.studentApproval[0].status}</TableCell>
                     </>
                   )}
 
