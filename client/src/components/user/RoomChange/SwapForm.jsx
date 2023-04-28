@@ -55,6 +55,9 @@ const Swap = () => {
       navigate("/users/change-request");
       // setInterval(() => {
       // }, 650);
+    }else{
+      ErrorNotify("Error");
+
     }
   };
   return (

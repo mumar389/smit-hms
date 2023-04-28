@@ -70,9 +70,10 @@ const Single = () => {
         segment: "",
         roomNo: 0,
       });
-      setInterval(() => {
-        navigate("/users/get-request");
-      }, 650);
+      navigate("/users/change-request");
+      // setInterval(() => {
+      //   navigate("/users/get-request");
+      // }, 650);
     }
   };
   return (
