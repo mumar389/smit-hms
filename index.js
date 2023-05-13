@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/',require('./routes'))
-if (process.env.MODE == "production") {
+// if (process.env.MODE == "production") {
   const path=require('path')
   //serving all the statick files like main.js,main.css-:
   app.use(express.static(path.resolve(__dirname, "client", "build")));
@@ -49,7 +49,7 @@ if (process.env.MODE == "production") {
     // console.log("Inside me");
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
-}
+// }
 
 
 app.listen(port,()=>{
