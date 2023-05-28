@@ -16,7 +16,8 @@ import ReadNotify from "./ReadNotify";
 import { useCookies } from "react-cookie";
 import { base } from "../../../url/url";
 
-const Notify = () => {
+const Notify = (props) => {
+  const { socket } = props;
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -122,9 +123,12 @@ const Notify = () => {
   };
 
   useEffect(() => {
+    socket.on("recv-notify", (data) => {
+      getNotify();
+    });
     getNotify();
     // eslint-disable-next-line
-  }, []);
+  }, [socket]);
   return (
     <>
       <Box height={40}></Box>
