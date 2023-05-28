@@ -76,7 +76,7 @@ function App() {
           />
           <Route
             path="notify-page"
-            element={<Protected Component={Notify} />}
+            element={<Protected Component={Notify} socket={socket}/>}
           />
           <Route path="all-req" element={<Protected Component={AllReq} />} />
           <Route
@@ -95,7 +95,7 @@ function App() {
           <Route path="" index element={<AuthUser Component={User} />} />
           <Route
             path="create-complain"
-            element={<AuthUser Component={CreateComplain} />}
+            element={<AuthUser Component={CreateComplain} socket={socket}/>}
           />
           <Route
             path="get-complains"

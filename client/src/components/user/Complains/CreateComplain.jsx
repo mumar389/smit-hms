@@ -20,6 +20,7 @@ const userNotify = () =>
     "Complain Registered Sucessfully,Your problem will be solved soon!!"
   );
 const CreateComplain = (props) => {
+  const {socket,user}=props;
   const [cookie] = useCookies();
   const [desc, setDesc] = React.useState("");
   const [type, setType] = React.useState("");
@@ -56,9 +57,14 @@ const CreateComplain = (props) => {
       console.log(data);
       userNotify();
     }
+    socket.emit('send-notify',{
+      type:type,
+      user:user.name
+    });
     setDate("");
     setDesc("");
     setType("");
+    
   };
   const formone = () => {
     return (
