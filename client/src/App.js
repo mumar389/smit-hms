@@ -31,6 +31,9 @@ import LeaveForm from "./components/user/leaves/LeaveForm";
 import Leaves from "./components/user/leaves/Leaves";
 import AllLeave from "./components/admin/Leaves/AllLeave";
 import UpdatePasswordWarden from "./components/warden/dashboard/UpdatePasswordWarden";
+import io from "socket.io-client";
+const socket=io("https://smit-hms.vercel.app:8960")
+socket.on('connection')
 function App() {
   return (
     <>

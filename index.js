@@ -22,6 +22,12 @@ const bodyParser = require("body-parser");
 
 
 const app=express();
+//handling socket.io connection-:
+
+const server=require('http').Server(app);
+const notificationHandler=require('./config/notifcation_socket').handleSocket(server);
+server.listen(8960);
+console.log("Socket Server is listening of 8960");
 
 app.use(cors());
 app.use(cookieParser())
